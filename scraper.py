@@ -1,4 +1,8 @@
 from requests_html import HTMLSession
+import numpy
+
+isbnlist = ['1599869772']
+books = [['title','author','publisher']]
 
 def scrapeBook(isbn):
     s = HTMLSession()
@@ -14,4 +18,11 @@ def scrapeBook(isbn):
     print(book)
     return book
 
-scrapeBook('1599869772')
+def outputBooklist():
+    for isbn in isbnlist:
+        book = scrapeBook(isbn)
+        bookline = [book['title'], book['author'], book['publisher']]
+        books.append(bookline)
+
+a = numpy.asarray(books)
+numpy.savetxt("booklist.csv", a, delimiter=",")
