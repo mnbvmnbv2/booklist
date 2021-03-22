@@ -15,7 +15,6 @@ def scrapeBook(isbn):
         'publisher' : r.html.xpath('//*[@id="anonCarousel4"]/ol/li[3]/div/div[3]/span', first=True).text,
     }
 
-    print(book)
     return book
 
 def outputBooklist():
@@ -24,5 +23,6 @@ def outputBooklist():
         bookline = [book['title'], book['author'], book['publisher']]
         books.append(bookline)
 
-a = numpy.asarray(books)
-numpy.savetxt("booklist.csv", a, delimiter=",")
+outputBooklist()
+print(books)
+numpy.savetxt("booklist.csv", books, fmt="%s", delimiter=",")
